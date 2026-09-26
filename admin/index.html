@@ -1,0 +1,1049 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>وایلند | پنل مدیریت - داشبورد</title>
+
+  <!-- #region FavIcon -->
+  <link rel="icon" type="image/png" href="../assets/images/fav-icon.png">
+  <!-- endregion -->
+
+  <!-- #region ApexCharts -->
+  <link rel="stylesheet" href="../src/css/apexcharts.css">
+  <!-- endregion -->
+
+  <!-- #region Stylesheets -->
+  <link rel="stylesheet" href="../src/css/style.css" />
+  <!-- endregion -->
+
+  <!-- #region Google Fonts (Vazirmatn for Persian) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet" />
+  <!-- endregion -->
+</head>
+
+<body class="bg-light font-['Vazirmatn'] text-dark antialiased">
+  <!-- #region SIDEBAR (desktop, docks right, collapsible via body class) -->
+  <aside id="admin-sidebar"
+    class="admin-sidebar fixed inset-y-0 right-0 z-40 hidden flex-col border-e border-border bg-white lg:flex">
+    <!-- Sidebar Header (logo + collapse toggle) -->
+    <div class="admin-sidebar-header relative flex h-20 shrink-0 items-center border-b border-border px-6">
+      <a href="../index.html" aria-label="صفحه اصلی وایلند" class="shrink-0">
+        <!-- Full wordmark (expanded state) -->
+        <img src="../assets/images/logo.png" alt="whyland" class="admin-sidebar-logo h-auto w-24" />
+        <!-- Compact mark (collapsed state) -->
+        <img src="../assets/images/fav-icon.png" alt="whyland" class="admin-sidebar-logo-compact hidden size-9" />
+      </a>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="flex-1 overflow-y-auto px-4 py-5" aria-label="منوی پنل مدیریت">
+      <ul class="flex flex-col gap-1">
+        <!-- Dashboard menu item -->
+        <li>
+          <a href="index.html" aria-current="page"
+            class="admin-menu-link flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-2.5 text-sm font-semibold text-primary transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <rect x="3" y="3" width="7" height="9" rx="1.5" />
+              <rect x="14" y="3" width="7" height="5" rx="1.5" />
+              <rect x="14" y="12" width="7" height="9" rx="1.5" />
+              <rect x="3" y="16" width="7" height="5" rx="1.5" />
+            </svg>
+            <span class="admin-menu-title">داشبورد</span>
+          </a>
+        </li>
+
+        <!-- Courses (accordion) -->
+        <li>
+          <button type="button" data-accordion-toggle
+            class="admin-menu-link flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary"
+            aria-expanded="false" aria-controls="menu-courses">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <path d="M4 19.5V6a2 2 0 0 1 2-2h11.5a2 2 0 0 1 2 2v13.5" />
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H19.5" />
+              <path d="M9 8h6" />
+            </svg>
+            <span class="admin-menu-title flex-1 text-start">دوره‌ها</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" class="admin-menu-chevron size-4 shrink-0 text-body transition-transform duration-200">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <ul id="menu-courses" class="admin-menu-accordion flex flex-col gap-1 ps-7 pt-1">
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">لیست
+                دوره‌ها</a></li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">دسته‌بندی‌ها</a>
+            </li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">سرفصل‌ها
+                و اپیزودها</a></li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">سوالات
+                متداول دوره</a></li>
+          </ul>
+        </li>
+
+        <!-- Orders (accordion) -->
+        <li>
+          <button type="button" data-accordion-toggle
+            class="admin-menu-link flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary"
+            aria-expanded="false" aria-controls="menu-orders">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <path d="M3 6h18" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            <span class="admin-menu-title flex-1 text-start">سفارشات</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" class="admin-menu-chevron size-4 shrink-0 text-body transition-transform duration-200">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <ul id="menu-orders" class="admin-menu-accordion flex flex-col gap-1 ps-7 pt-1">
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">لیست
+                سفارشات</a></li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">لیست
+                پرداخت‌ها</a></li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">کدهای
+                تخفیف</a></li>
+          </ul>
+        </li>
+
+        <!-- Users & Roles (accordion) -->
+        <li>
+          <button type="button" data-accordion-toggle
+            class="admin-menu-link flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary"
+            aria-expanded="false" aria-controls="menu-users">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            <span class="admin-menu-title flex-1 text-start">کاربران و نقش‌ها</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" class="admin-menu-chevron size-4 shrink-0 text-body transition-transform duration-200">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <ul id="menu-users" class="admin-menu-accordion flex flex-col gap-1 ps-7 pt-1">
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">لیست
+                کاربران</a></li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">نقش‌ها</a>
+            </li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">دسترسی‌ها</a>
+            </li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">پروفایل
+                مدرس</a></li>
+          </ul>
+        </li>
+
+        <!-- Blog posts -->
+        <li>
+          <a href="#"
+            class="admin-menu-link flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <path d="M14 2v6h6" />
+              <path d="M16 13H8" />
+              <path d="M16 17H8" />
+              <path d="M10 9H8" />
+            </svg>
+            <span class="admin-menu-title">مقالات</span>
+          </a>
+        </li>
+
+        <!-- FAQs -->
+        <li>
+          <a href="#"
+            class="admin-menu-link flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+              <path d="M12 17h.01" />
+            </svg>
+            <span class="admin-menu-title">سوالات متداول</span>
+          </a>
+        </li>
+
+        <!-- Settings -->
+        <li>
+          <a href="#"
+            class="admin-menu-link flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            </svg>
+            <span class="admin-menu-title">تنظیمات</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Sidebar Footer: back to site -->
+    <div class="shrink-0 border-t border-border p-4">
+      <a href="../index.html"
+        class="admin-menu-link flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          class="size-5 shrink-0">
+          <path d="M19 12H5" />
+          <path d="m12 19-7-7 7-7" />
+        </svg>
+        <span class="admin-menu-title">بازگشت به سایت</span>
+      </a>
+    </div>
+  </aside>
+
+  <button type="button" id="admin-sidebar-toggle"
+    class="admin-sidebar-toggle -translate-y-1/2 fixed z-50 hidden size-7.5 cursor-pointer items-center justify-center rounded-lg border border-border bg-white text-body shadow-sm transition-colors hover:text-primary lg:flex"
+    style="top: 2.5rem;" aria-expanded="true" aria-label="جمع کردن سایدبار">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      class="size-4 transform scale-x-[-1]">
+      <path d="M19 12H5" />
+      <path d="m12 19-7-7 7-7" />
+    </svg>
+  </button>
+  <!-- endregion -->
+
+  <!-- #region HEADER (fixed, offset follows sidebar state) -->
+  <header id="admin-header"
+    class="admin-header-offset fixed top-0 z-30 flex h-20 w-full items-center justify-between border-b border-border bg-white/95 px-4 backdrop-blur-sm sm:px-6 lg:px-8">
+    <div class="flex items-center gap-3">
+      <!-- Mobile menu trigger -->
+      <button type="button" id="admin-mobile-menu-button"
+        class="flex size-9 cursor-pointer items-center justify-center rounded-md transition-all active:scale-95 active:bg-gray-100 lg:hidden"
+        aria-label="باز کردن منو" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          class="size-6">
+          <path d="M4 6h16" />
+          <path d="M4 12h16" />
+          <path d="M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Page title (visible from sm) -->
+      <h1 class="hidden text-base font-bold sm:block">داشبورد</h1>
+    </div>
+
+    <div class="flex items-center gap-2 sm:gap-3">
+      <!-- View site link -->
+      <a href="../index.html"
+        class="hidden size-9 items-center justify-center rounded-full border border-border text-body transition-colors hover:border-primary hover:bg-primary hover:text-white min-[500px]:flex"
+        aria-label="مشاهده سایت">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          class="size-4">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+          <path d="M15 3h6v6" />
+          <path d="M10 14 21 3" />
+        </svg>
+      </a>
+
+      <!-- Notifications -->
+      <button type="button"
+        class="flex size-9 items-center justify-center rounded-full border border-border text-body transition-colors hover:border-primary hover:bg-primary hover:text-white"
+        aria-label="اعلان‌ها">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          class="size-4">
+          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+          <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+        </svg>
+      </button>
+
+      <!-- Admin user dropdown -->
+      <div class="relative" id="admin-user-dropdown-wrapper">
+        <button type="button" id="admin-user-button"
+          class="flex cursor-pointer items-center gap-2 rounded-full border border-border py-1 pe-3 ps-1 transition-colors hover:border-primary"
+          aria-haspopup="true" aria-expanded="false">
+          <span
+            class="flex size-8 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">م‌ز</span>
+          <span class="hidden text-xs font-semibold sm:block">محمدمهدی زنگنه</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            class="size-4 text-body transition-transform duration-200" id="admin-user-chevron">
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </button>
+
+        <!-- Dropdown panel -->
+        <div id="admin-user-dropdown"
+          class="invisible absolute inset-e-0 top-full z-50 mt-2 w-52 opacity-0 transition-all duration-200">
+          <div class="grid gap-1 rounded-xl border border-border bg-white p-2 shadow-lg">
+            <a href="#"
+              class="rounded-lg px-3 py-2 text-xs font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary">ویرایش
+              پروفایل</a>
+            <a href="#"
+              class="rounded-lg px-3 py-2 text-xs font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary">تغییر
+              رمز عبور</a>
+            <div class="my-1 border-t border-border"></div>
+            <a href="../login.html"
+              class="rounded-lg px-3 py-2 text-xs font-medium text-danger transition-colors hover:bg-danger-light">خروج
+              از حساب</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- endregion -->
+
+  <!-- #region Backdrop Overlay (mobile drawer) -->
+  <div id="admin-menu-overlay"
+    class="pointer-events-none fixed inset-0 z-40 bg-black/50 opacity-0 backdrop-blur-sm transition-opacity duration-300 lg:hidden">
+  </div>
+  <!-- endregion -->
+
+  <!-- #region MOBILE DRAWER (slides from right) -->
+  <aside id="admin-mobile-menu"
+    class="fixed inset-y-0 right-0 z-50 flex w-72 translate-x-full flex-col bg-white shadow-2xl transition-transform duration-300 ease-in-out lg:hidden">
+    <!-- Drawer Header -->
+    <div class="flex h-20 shrink-0 items-center justify-between border-b border-border px-5">
+      <img src="../assets/images/logo.png" alt="whyland" class="h-auto w-24" />
+      <button type="button" id="admin-close-menu-button"
+        class="cursor-pointer rounded-lg p-1 text-gray-500 hover:bg-gray-100" aria-label="بستن منو">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+          class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Drawer Menu (mirrors desktop sidebar) -->
+    <nav class="flex-1 overflow-y-auto px-4 py-5" aria-label="منوی پنل مدیریت">
+      <ul class="flex flex-col gap-1">
+        <li>
+          <a href="index.html"
+            class="flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-2.5 text-sm font-semibold text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <rect x="3" y="3" width="7" height="9" rx="1.5" />
+              <rect x="14" y="3" width="7" height="5" rx="1.5" />
+              <rect x="14" y="12" width="7" height="9" rx="1.5" />
+              <rect x="3" y="16" width="7" height="5" rx="1.5" />
+            </svg>
+            <span>داشبورد</span>
+          </a>
+        </li>
+        <li>
+          <button type="button" data-accordion-toggle
+            class="flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary"
+            aria-expanded="false" aria-controls="drawer-menu-courses">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <path d="M4 19.5V6a2 2 0 0 1 2-2h11.5a2 2 0 0 1 2 2v13.5" />
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H19.5" />
+              <path d="M9 8h6" />
+            </svg>
+            <span class="flex-1 text-start">دوره‌ها</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" class="admin-menu-chevron size-4 shrink-0 text-body transition-transform duration-200">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <ul id="drawer-menu-courses" class="hidden flex-col gap-1 ps-7 pt-1">
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">لیست
+                دوره‌ها</a></li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">دسته‌بندی‌ها</a>
+            </li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">سرفصل‌ها
+                و اپیزودها</a></li>
+          </ul>
+        </li>
+        <li>
+          <button type="button" data-accordion-toggle
+            class="flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary"
+            aria-expanded="false" aria-controls="drawer-menu-orders">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <path d="M3 6h18" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            <span class="flex-1 text-start">سفارشات</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" class="admin-menu-chevron size-4 shrink-0 text-body transition-transform duration-200">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <ul id="drawer-menu-orders" class="hidden flex-col gap-1 ps-7 pt-1">
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">لیست
+                سفارشات</a></li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">لیست
+                پرداخت‌ها</a></li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">کدهای
+                تخفیف</a></li>
+          </ul>
+        </li>
+        <li>
+          <button type="button" data-accordion-toggle
+            class="flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary"
+            aria-expanded="false" aria-controls="drawer-menu-users">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            <span class="flex-1 text-start">کاربران و نقش‌ها</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" class="admin-menu-chevron size-4 shrink-0 text-body transition-transform duration-200">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <ul id="drawer-menu-users" class="hidden flex-col gap-1 ps-7 pt-1">
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">لیست
+                کاربران</a></li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">نقش‌ها</a>
+            </li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">دسترسی‌ها</a>
+            </li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">پروفایل
+                مدرس</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#"
+            class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <path d="M14 2v6h6" />
+              <path d="M16 13H8" />
+              <path d="M16 17H8" />
+            </svg>
+            <span>مقالات</span>
+          </a>
+        </li>
+        <li>
+          <a href="#"
+            class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+              <path d="M12 17h.01" />
+            </svg>
+            <span>سوالات متداول</span>
+          </a>
+        </li>
+        <li>
+          <a href="#"
+            class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            </svg>
+            <span>تنظیمات</span>
+          </a>
+        </li>
+        <!-- Back to site -->
+        <li class="mt-4 border-t border-border pt-4">
+          <a href="../index.html"
+            class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <path d="M19 12H5" />
+              <path d="m12 19-7-7 7-7" />
+            </svg>
+            <span>بازگشت به سایت</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+  <!-- endregion -->
+
+  <!-- #region MAIN -->
+  <main class="admin-main-offset min-h-screen px-4 pb-12 pt-24 sm:px-6 lg:px-8">
+    <!-- Page Heading (mobile) + Breadcrumb -->
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <div>
+        <h1 class="text-lg font-bold sm:hidden">داشبورد</h1>
+        <nav class="hidden items-center gap-1.5 text-xs text-body sm:flex" aria-label="مسیر">
+          <a href="../index.html" class="transition-colors hover:text-primary">وایلند</a>
+          <span class="text-gray-400">/</span>
+          <span class="font-medium text-dark">پنل مدیریت</span>
+          <span class="text-gray-400">/</span>
+          <span class="font-medium text-primary">داشبورد</span>
+        </nav>
+      </div>
+      <span id="admin-today-date"
+        class="rounded-lg bg-white px-3 py-1.5 text-xs font-medium text-body shadow-sm">--</span>
+    </div>
+
+    <!-- #region Stat Cards -->
+    <section class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3" aria-label="آمار کلی">
+      <!-- Users stat card -->
+      <article class="rounded-2xl border border-border bg-white p-5 shadow-sm">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-xs font-medium text-body">تعداد کاربران</p>
+            <p class="mt-2 text-2xl font-bold text-dark">۱٬۲۴۸</p>
+            <p class="mt-2 flex items-center gap-1 text-xs font-medium text-success">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" class="size-3.5 rtl:-scale-x-100">
+                <path d="M7 17 17 7" />
+                <path d="M8 7h9v9" />
+              </svg>
+              <span>+۱۲٪</span>
+              <span class="text-body">نسبت به ماه گذشته</span>
+            </p>
+          </div>
+          <div class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-6">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </div>
+        </div>
+      </article>
+
+      <!-- Courses stat card -->
+      <article class="rounded-2xl border border-border bg-white p-5 shadow-sm">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-xs font-medium text-body">تعداد دوره‌ها</p>
+            <p class="mt-2 text-2xl font-bold text-dark">۴۸</p>
+            <p class="mt-2 flex items-center gap-1 text-xs font-medium text-success">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" class="size-3.5 rtl:-scale-x-100">
+                <path d="M7 17 17 7" />
+                <path d="M8 7h9v9" />
+              </svg>
+              <span>+۴ جدید</span>
+              <span class="text-body">نسبت به ماه گذشته</span>
+            </p>
+          </div>
+          <div class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-info/10 text-info">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-6">
+              <path d="M4 19.5V6a2 2 0 0 1 2-2h11.5a2 2 0 0 1 2 2v13.5" />
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H19.5" />
+              <path d="M9 8h6" />
+            </svg>
+          </div>
+        </div>
+      </article>
+
+      <!-- Orders stat card -->
+      <article class="rounded-2xl border border-border bg-white p-5 shadow-sm">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-xs font-medium text-body">تعداد سفارشات</p>
+            <p class="mt-2 text-2xl font-bold text-dark">۳۲۶</p>
+            <p class="mt-2 flex items-center gap-1 text-xs font-medium text-success">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" class="size-3.5 rtl:-scale-x-100">
+                <path d="M7 17 17 7" />
+                <path d="M8 7h9v9" />
+              </svg>
+              <span>+۸٪</span>
+              <span class="text-body">نسبت به ماه گذشته</span>
+            </p>
+          </div>
+          <div class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-warning/10 text-warning">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-6">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <path d="M3 6h18" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+          </div>
+        </div>
+      </article>
+
+      <!-- Total revenue stat card -->
+      <article class="rounded-2xl border border-border bg-white p-5 shadow-sm">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-xs font-medium text-body">درآمد کل</p>
+            <p class="mt-2 text-2xl font-bold text-dark">۴۵۲٬۰۰۰٬۰۰۰ <span
+                class="text-sm font-medium text-body">تومان</span></p>
+            <p class="mt-2 flex items-center gap-1 text-xs font-medium text-success">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" class="size-3.5 rtl:-scale-x-100">
+                <path d="M7 17 17 7" />
+                <path d="M8 7h9v9" />
+              </svg>
+              <span>+۱۵٪</span>
+              <span class="text-body">نسبت به ماه گذشته</span>
+            </p>
+          </div>
+          <div class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-success/10 text-success">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-6">
+              <line x1="12" y1="2" x2="12" y2="22" />
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg>
+          </div>
+        </div>
+      </article>
+
+      <!-- Successful payments stat card -->
+      <article class="rounded-2xl border border-border bg-white p-5 shadow-sm">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-xs font-medium text-body">پرداخت‌های موفق</p>
+            <p class="mt-2 text-2xl font-bold text-dark">۲۹۸</p>
+            <p class="mt-2 flex items-center gap-1 text-xs font-medium text-success">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" class="size-3.5 rtl:-scale-x-100">
+                <path d="M7 17 17 7" />
+                <path d="M8 7h9v9" />
+              </svg>
+              <span>+۶٪</span>
+              <span class="text-body">نسبت به ماه گذشته</span>
+            </p>
+          </div>
+          <div class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-success/10 text-success">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-6">
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          </div>
+        </div>
+      </article>
+
+      <!-- Failed payments stat card -->
+      <article class="rounded-2xl border border-border bg-white p-5 shadow-sm">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-xs font-medium text-body">پرداخت‌های ناموفق</p>
+            <p class="mt-2 text-2xl font-bold text-dark">۲۸</p>
+            <p class="mt-2 flex items-center gap-1 text-xs font-medium text-danger">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" class="size-3.5 rtl:-scale-x-100">
+                <path d="M7 7l10 10M17 7 7 17" />
+              </svg>
+              <span>+۳</span>
+              <span class="text-body">نسبت به ماه گذشته</span>
+            </p>
+          </div>
+          <div class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-danger/10 text-danger">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-6">
+              <circle cx="12" cy="12" r="10" />
+              <path d="m15 9-6 6" />
+              <path d="m9 9 6 6" />
+            </svg>
+          </div>
+        </div>
+      </article>
+    </section>
+    <!-- endregion -->
+
+    <!-- #region Chart + Quick Links -->
+    <section class="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <!-- Sales Chart -->
+      <article class="rounded-2xl border border-border bg-white p-5 shadow-sm lg:col-span-2">
+        <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 class="text-sm font-bold">نمودار فروش</h2>
+            <p class="mt-1 text-xs text-body">۶ ماه گذشته — مبلغ به تومان</p>
+          </div>
+        </div>
+        <div id="sales-chart" class="h-72 w-full"></div>
+      </article>
+
+      <!-- Quick Links -->
+      <article class="rounded-2xl border border-border bg-white p-5 shadow-sm">
+        <h2 class="text-sm font-bold">دسترسی سریع</h2>
+        <p class="mt-1 text-xs text-body">میانبر به ماژول‌های پرکاربرد</p>
+        <div class="mt-4 grid grid-cols-2 gap-3">
+          <a href="#"
+            class="rounded-xl border border-border p-4 text-center transition-colors hover:border-primary hover:bg-primary/5">
+            <div class="mx-auto flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" class="size-5">
+                <path d="M12 5v14" />
+                <path d="M5 12h14" />
+              </svg>
+            </div>
+            <span class="mt-2 block text-xs font-semibold text-dark">دوره جدید</span>
+          </a>
+          <a href="#"
+            class="rounded-xl border border-border p-4 text-center transition-colors hover:border-primary hover:bg-primary/5">
+            <div class="mx-auto flex size-10 items-center justify-center rounded-lg bg-info/10 text-info">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" class="size-5">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <path d="M14 2v6h6" />
+              </svg>
+            </div>
+            <span class="mt-2 block text-xs font-semibold text-dark">مقاله جدید</span>
+          </a>
+          <a href="#"
+            class="rounded-xl border border-border p-4 text-center transition-colors hover:border-primary hover:bg-primary/5">
+            <div class="mx-auto flex size-10 items-center justify-center rounded-lg bg-success/10 text-success">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" class="size-5">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+              </svg>
+            </div>
+            <span class="mt-2 block text-xs font-semibold text-dark">دسته‌بندی جدید</span>
+          </a>
+          <a href="#"
+            class="rounded-xl border border-border p-4 text-center transition-colors hover:border-primary hover:bg-primary/5">
+            <div class="mx-auto flex size-10 items-center justify-center rounded-lg bg-warning/10 text-warning">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" class="size-5">
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                <path d="M3 6h18" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+              </svg>
+            </div>
+            <span class="mt-2 block text-xs font-semibold text-dark">کد تخفیف جدید</span>
+          </a>
+        </div>
+      </article>
+    </section>
+    <!-- endregion -->
+
+    <!-- #region Latest Orders + Latest Users -->
+    <section class="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <!-- Latest Orders -->
+      <article class="rounded-2xl border border-border bg-white shadow-sm lg:col-span-2">
+        <div class="flex items-center justify-between border-b border-border px-5 py-4">
+          <h2 class="text-sm font-bold">آخرین سفارشات</h2>
+          <a href="#" class="text-xs font-medium text-primary transition-colors hover:text-primary/80">
+            مشاهده همه
+          </a>
+        </div>
+
+        <div class="overflow-hidden">
+          <table class="w-full text-xs sm:text-sm">
+            <thead class="hidden bg-light text-body sm:table-header-group">
+              <tr class="border-b border-border">
+                <th class="px-5 py-3 text-start font-medium">شماره سفارش</th>
+                <th class="px-5 py-3 text-start font-medium">کاربر</th>
+                <th class="px-5 py-3 text-start font-medium">مبلغ</th>
+                <th class="px-5 py-3 text-start font-medium">وضعیت</th>
+                <th class="px-5 py-3 text-start font-medium">تاریخ</th>
+              </tr>
+            </thead>
+
+            <tbody class="block divide-y divide-border sm:table-row-group">
+
+              <!-- Order -->
+              <tr class="block px-4 py-4 transition-colors hover:bg-gray-50 sm:table-row sm:px-0">
+                <td data-label="شماره سفارش"
+                  class="flex items-center justify-between gap-4 py-1.5 font-medium text-dark sm:table-cell sm:px-5 sm:py-3"
+                  dir="rtl">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    شماره سفارش
+                  </span>
+                  <span>ORD-1042</span>
+                </td>
+
+                <td data-label="کاربر"
+                  class="flex items-center justify-between gap-4 py-1.5 sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    کاربر
+                  </span>
+                  <span>سارا احمدی</span>
+                </td>
+
+                <td data-label="مبلغ"
+                  class="flex items-center justify-between gap-4 py-1.5 sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    مبلغ
+                  </span>
+                  <span>۱٬۲۰۰٬۰۰۰ تومان</span>
+                </td>
+
+                <td data-label="وضعیت"
+                  class="flex items-center justify-between gap-4 py-1.5 sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    وضعیت
+                  </span>
+                  <span class="rounded-lg bg-success-light px-2 py-1 text-[11px] font-semibold text-success">
+                    موفق
+                  </span>
+                </td>
+
+                <td data-label="تاریخ"
+                  class="flex items-center justify-between gap-4 py-1.5 text-body sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    تاریخ
+                  </span>
+                  <span>۱۴۰۴/۰۶/۳۰</span>
+                </td>
+              </tr>
+
+              <!-- Order -->
+              <tr class="block px-4 py-4 transition-colors hover:bg-gray-50 sm:table-row sm:px-0">
+                <td
+                  class="flex items-center justify-between gap-4 py-1.5 font-medium text-dark sm:table-cell sm:px-5 sm:py-3"
+                  dir="rtl">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    شماره سفارش
+                  </span>
+                  <span>ORD-1041</span>
+                </td>
+
+                <td class="flex items-center justify-between gap-4 py-1.5 sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    کاربر
+                  </span>
+                  <span>علی رضایی</span>
+                </td>
+
+                <td class="flex items-center justify-between gap-4 py-1.5 sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    مبلغ
+                  </span>
+                  <span>۸۵۰٬۰۰۰ تومان</span>
+                </td>
+
+                <td class="flex items-center justify-between gap-4 py-1.5 sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    وضعیت
+                  </span>
+                  <span class="rounded-lg bg-warning-light px-2 py-1 text-[11px] font-semibold text-warning">
+                    در انتظار
+                  </span>
+                </td>
+
+                <td class="flex items-center justify-between gap-4 py-1.5 text-body sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    تاریخ
+                  </span>
+                  <span>۱۴۰۴/۰۶/۲۹</span>
+                </td>
+              </tr>
+
+              <!-- Order -->
+              <tr class="block px-4 py-4 transition-colors hover:bg-gray-50 sm:table-row sm:px-0">
+                <td
+                  class="flex items-center justify-between gap-4 py-1.5 font-medium text-dark sm:table-cell sm:px-5 sm:py-3"
+                  dir="rtl">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    شماره سفارش
+                  </span>
+                  <span>ORD-1040</span>
+                </td>
+
+                <td class="flex items-center justify-between gap-4 py-1.5 sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    کاربر
+                  </span>
+                  <span>مریم کریمی</span>
+                </td>
+
+                <td class="flex items-center justify-between gap-4 py-1.5 sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    مبلغ
+                  </span>
+                  <span>۲٬۴۰۰٬۰۰۰ تومان</span>
+                </td>
+
+                <td class="flex items-center justify-between gap-4 py-1.5 sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    وضعیت
+                  </span>
+                  <span class="rounded-lg bg-success-light px-2 py-1 text-[11px] font-semibold text-success">
+                    موفق
+                  </span>
+                </td>
+
+                <td class="flex items-center justify-between gap-4 py-1.5 text-body sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    تاریخ
+                  </span>
+                  <span>۱۴۰۴/۰۶/۲۸</span>
+                </td>
+              </tr>
+
+              <!-- Order -->
+              <tr class="block px-4 py-4 transition-colors hover:bg-gray-50 sm:table-row sm:px-0">
+                <td
+                  class="flex items-center justify-between gap-4 py-1.5 font-medium text-dark sm:table-cell sm:px-5 sm:py-3"
+                  dir="rtl">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    شماره سفارش
+                  </span>
+                  <span>ORD-1039</span>
+                </td>
+
+                <td class="flex items-center justify-between gap-4 py-1.5 sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    کاربر
+                  </span>
+                  <span>رضا موسوی</span>
+                </td>
+
+                <td class="flex items-center justify-between gap-4 py-1.5 sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    مبلغ
+                  </span>
+                  <span>۴۵۰٬۰۰۰ تومان</span>
+                </td>
+
+                <td class="flex items-center justify-between gap-4 py-1.5 sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    وضعیت
+                  </span>
+                  <span class="rounded-lg bg-danger-light px-2 py-1 text-[11px] font-semibold text-danger">
+                    ناموفق
+                  </span>
+                </td>
+
+                <td class="flex items-center justify-between gap-4 py-1.5 text-body sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    تاریخ
+                  </span>
+                  <span>۱۴۰۴/۰۶/۲۷</span>
+                </td>
+              </tr>
+
+              <!-- Order -->
+              <tr class="block px-4 py-4 transition-colors hover:bg-gray-50 sm:table-row sm:px-0">
+                <td
+                  class="flex items-center justify-between gap-4 py-1.5 font-medium text-dark sm:table-cell sm:px-5 sm:py-3"
+                  dir="rtl">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    شماره سفارش
+                  </span>
+                  <span>ORD-1038</span>
+                </td>
+
+                <td class="flex items-center justify-between gap-4 py-1.5 sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    کاربر
+                  </span>
+                  <span>نگار صادقی</span>
+                </td>
+
+                <td class="flex items-center justify-between gap-4 py-1.5 sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    مبلغ
+                  </span>
+                  <span>۱٬۱۰۰٬۰۰۰ تومان</span>
+                </td>
+
+                <td class="flex items-center justify-between gap-4 py-1.5 sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    وضعیت
+                  </span>
+                  <span class="rounded-lg bg-success-light px-2 py-1 text-[11px] font-semibold text-success">
+                    موفق
+                  </span>
+                </td>
+
+                <td class="flex items-center justify-between gap-4 py-1.5 text-body sm:table-cell sm:px-5 sm:py-3">
+                  <span class="text-[11px] font-medium text-body sm:hidden">
+                    تاریخ
+                  </span>
+                  <span>۱۴۰۴/۰۶/۲۶</span>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <!-- Latest Users -->
+      <article class="rounded-2xl border border-border bg-white shadow-sm">
+        <div class="flex items-center justify-between border-b border-border px-5 py-4">
+          <h2 class="text-sm font-bold">آخرین کاربران</h2>
+          <a href="#" class="text-xs font-medium text-primary transition-colors hover:text-primary/80">مشاهده همه</a>
+        </div>
+        <ul class="divide-y divide-border">
+          <li class="flex items-center gap-3 px-5 py-3.5 transition-colors hover:bg-gray-50">
+            <span
+              class="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">س‌ا</span>
+            <div class="min-w-0 flex-1">
+              <p class="truncate text-xs font-semibold text-dark">سارا احمدی</p>
+              <p class="truncate text-[11px] text-body" dir="ltr">sara@whyland.com</p>
+            </div>
+            <span class="shrink-0 text-[11px] text-body">۱۴۰۴/۰۶/۳۰</span>
+          </li>
+          <li class="flex items-center gap-3 px-5 py-3.5 transition-colors hover:bg-gray-50">
+            <span
+              class="flex size-10 shrink-0 items-center justify-center rounded-full bg-info/10 text-xs font-bold text-info">ع‌ر</span>
+            <div class="min-w-0 flex-1">
+              <p class="truncate text-xs font-semibold text-dark">علی رضایی</p>
+              <p class="truncate text-[11px] text-body" dir="ltr">ali@whyland.com</p>
+            </div>
+            <span class="shrink-0 text-[11px] text-body">۱۴۰۴/۰۶/۲۹</span>
+          </li>
+          <li class="flex items-center gap-3 px-5 py-3.5 transition-colors hover:bg-gray-50">
+            <span
+              class="flex size-10 shrink-0 items-center justify-center rounded-full bg-warning/10 text-xs font-bold text-warning">م‌ک</span>
+            <div class="min-w-0 flex-1">
+              <p class="truncate text-xs font-semibold text-dark">مریم کریمی</p>
+              <p class="truncate text-[11px] text-body" dir="ltr">maryam@whyland.com</p>
+            </div>
+            <span class="shrink-0 text-[11px] text-body">۱۴۰۴/۰۶/۲۸</span>
+          </li>
+          <li class="flex items-center gap-3 px-5 py-3.5 transition-colors hover:bg-gray-50">
+            <span
+              class="flex size-10 shrink-0 items-center justify-center rounded-full bg-success/10 text-xs font-bold text-success">ر‌م</span>
+            <div class="min-w-0 flex-1">
+              <p class="truncate text-xs font-semibold text-dark">رضا موسوی</p>
+              <p class="truncate text-[11px] text-body" dir="ltr">reza@whyland.com</p>
+            </div>
+            <span class="shrink-0 text-[11px] text-body">۱۴۰۴/۰۶/۲۷</span>
+          </li>
+          <li class="flex items-center gap-3 px-5 py-3.5 transition-colors hover:bg-gray-50">
+            <span
+              class="flex size-10 shrink-0 items-center justify-center rounded-full bg-danger/10 text-xs font-bold text-danger">ن‌ص</span>
+            <div class="min-w-0 flex-1">
+              <p class="truncate text-xs font-semibold text-dark">نگار صادقی</p>
+              <p class="truncate text-[11px] text-body" dir="ltr">negar@whyland.com</p>
+            </div>
+            <span class="shrink-0 text-[11px] text-body">۱۴۰۴/۰۶/۲۶</span>
+          </li>
+        </ul>
+      </article>
+    </section>
+    <!-- endregion -->
+  </main>
+  <!-- endregion -->
+
+  <!-- #region Entry JavaScript Module -->
+  <script src="../src/js/admin/apexcharts.min.js"></script>
+  <script src="../src/js/admin/admin-layout.js" defer></script>
+  <script type="module" src="../src/js/admin/admin-dashboard.js"></script>
+  <!-- endregion -->
+
+  <!-- #region Jalali Date Utility -->
+  <script src="../src/js/jalali-date.js" defer></script>
+  <!-- #endregion -->
+</body>
+
+</html>

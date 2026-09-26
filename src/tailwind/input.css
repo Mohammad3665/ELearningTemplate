@@ -7,6 +7,16 @@
   --color-border: #e8e8e8;
   --color-light: #f7f7f7;
 
+  /* Semantic status colors (admin: order/payment states, charts) */
+  --color-success: #17c653;
+  --color-success-light: #eafff1;
+  --color-danger: #f8285a;
+  --color-danger-light: #ffeef3;
+  --color-warning: #f6b100;
+  --color-warning-light: #fff8dd;
+  --color-info: #7239ea;
+  --color-info-light: #f8f5ff;
+
   --font-family: "Exo", sans-serif;
 }
 

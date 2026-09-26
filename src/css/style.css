@@ -276,3 +276,236 @@ mark {
   color: var(--color-primary);
   /* primary color defined in Tailwind */
 }
+
+/* =========================================================
+   ADMIN SIDEBAR
+   ========================================================= */
+
+body {
+  --admin-sidebar-expanded-width: 18rem;
+  --admin-sidebar-collapsed-width: 5rem;
+  --admin-sidebar-width: var(--admin-sidebar-expanded-width);
+}
+
+/* =========================================================
+   SIDEBAR STATE
+   ========================================================= */
+
+body.admin-sidebar-collapsed {
+  --admin-sidebar-width: var(--admin-sidebar-collapsed-width);
+}
+
+/* =========================================================
+   DESKTOP SIDEBAR
+   ========================================================= */
+
+@media (min-width: 1024px) {
+
+  /* ---------------------------------------------------------
+     Sidebar
+     --------------------------------------------------------- */
+
+  .admin-sidebar {
+    width: var(--admin-sidebar-width);
+    transition:
+      width 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .admin-sidebar-toggle {
+    inset-inline-start: calc(var(--admin-sidebar-width) - 15px);
+    transition: inset-inline-start 0.3s ease;
+  }
+
+  /* وقتی سایدبار با هاور موقتاً باز می‌شه، دکمه هم باید دنبالش بره */
+  body.admin-sidebar-collapsed .admin-sidebar.admin-sidebar-hover-expanded~.admin-sidebar-toggle {
+    inset-inline-start: calc(var(--admin-sidebar-expanded-width) - 15px);
+  }
+
+  /* ---------------------------------------------------------
+     Header offset
+     --------------------------------------------------------- */
+
+  .admin-header-offset {
+    inset-inline-start: var(--admin-sidebar-width);
+    width: calc(100% - var(--admin-sidebar-width));
+
+    transition:
+      inset-inline-start 0.3s ease,
+      width 0.3s ease;
+  }
+
+  /* ---------------------------------------------------------
+     Main content offset
+     --------------------------------------------------------- */
+
+  .admin-main-offset {
+    margin-inline-start: var(--admin-sidebar-width);
+
+    transition:
+      margin-inline-start 0.3s ease;
+  }
+
+  /* ---------------------------------------------------------
+     Toggle icon
+     --------------------------------------------------------- */
+
+  .admin-sidebar-toggle svg {
+    transition: transform 0.3s ease;
+  }
+
+  body.admin-sidebar-collapsed .admin-sidebar-toggle svg {
+    transform: rotate(180deg);
+  }
+
+  /* =========================================================
+     COLLAPSED SIDEBAR
+     ========================================================= */
+
+  body.admin-sidebar-collapsed .admin-sidebar:not(.admin-sidebar-hover-expanded) {
+    width: var(--admin-sidebar-collapsed-width);
+  }
+
+  /* Header */
+
+  body.admin-sidebar-collapsed .admin-sidebar:not(.admin-sidebar-hover-expanded) .admin-sidebar-header {
+    justify-content: center;
+    padding-inline: 0;
+  }
+
+  /* Main logo */
+
+  body.admin-sidebar-collapsed .admin-sidebar:not(.admin-sidebar-hover-expanded) .admin-sidebar-logo {
+    display: none;
+  }
+
+  /* Compact logo */
+
+  body.admin-sidebar-collapsed .admin-sidebar:not(.admin-sidebar-hover-expanded) .admin-sidebar-logo-compact {
+    display: block;
+  }
+
+  /* Menu text */
+
+  body.admin-sidebar-collapsed .admin-sidebar:not(.admin-sidebar-hover-expanded) .admin-menu-title {
+    display: none;
+  }
+
+  /* Chevron */
+
+  body.admin-sidebar-collapsed .admin-sidebar:not(.admin-sidebar-hover-expanded) .admin-menu-chevron {
+    display: none;
+  }
+
+  /* Menu links */
+
+  body.admin-sidebar-collapsed .admin-sidebar:not(.admin-sidebar-hover-expanded) .admin-menu-link {
+    justify-content: center;
+    gap: 0;
+  }
+
+  /* =========================================================
+     TEMPORARY HOVER EXPANSION
+     ========================================================= */
+
+  body.admin-sidebar-collapsed .admin-sidebar.admin-sidebar-hover-expanded {
+    width: var(--admin-sidebar-expanded-width);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Header */
+
+  body.admin-sidebar-collapsed .admin-sidebar.admin-sidebar-hover-expanded .admin-sidebar-header {
+    justify-content: flex-start;
+    padding-inline: 1.5rem;
+  }
+
+  /* Main logo */
+
+  body.admin-sidebar-collapsed .admin-sidebar.admin-sidebar-hover-expanded .admin-sidebar-logo {
+    display: block;
+  }
+
+  /* Compact logo */
+
+  body.admin-sidebar-collapsed .admin-sidebar.admin-sidebar-hover-expanded .admin-sidebar-logo-compact {
+    display: none;
+  }
+
+  /* Menu text */
+
+  body.admin-sidebar-collapsed .admin-sidebar.admin-sidebar-hover-expanded .admin-menu-title {
+    display: block;
+  }
+
+  /* Chevron */
+
+  body.admin-sidebar-collapsed .admin-sidebar.admin-sidebar-hover-expanded .admin-menu-chevron {
+    display: block;
+  }
+
+  /* Menu links */
+
+  body.admin-sidebar-collapsed .admin-sidebar.admin-sidebar-hover-expanded .admin-menu-link {
+    justify-content: flex-start;
+    gap: 0.75rem;
+  }
+
+  /* =========================================================
+     MANUALLY COLLAPSED SIDEBAR
+     ========================================================= */
+
+  body.admin-sidebar-manually-collapsed .admin-sidebar {
+    width: var(--admin-sidebar-collapsed-width);
+    box-shadow: none;
+  }
+
+  /* Header */
+
+  body.admin-sidebar-manually-collapsed .admin-sidebar .admin-sidebar-header {
+    justify-content: center;
+    padding-inline: 0;
+  }
+
+
+  body.admin-sidebar-collapsed .admin-sidebar:not(.admin-sidebar-hover-expanded) .admin-menu-accordion {
+    display: none !important;
+  }
+
+  /* Main logo */
+
+  body.admin-sidebar-manually-collapsed .admin-sidebar .admin-sidebar-logo {
+    display: none;
+  }
+
+  /* Compact logo */
+
+  body.admin-sidebar-manually-collapsed .admin-sidebar .admin-sidebar-logo-compact {
+    display: block;
+  }
+
+  /* Menu text */
+
+  body.admin-sidebar-manually-collapsed .admin-sidebar .admin-menu-title {
+    display: none;
+  }
+
+  /* Chevron */
+
+  body.admin-sidebar-manually-collapsed .admin-sidebar .admin-menu-chevron {
+    display: none;
+  }
+
+  /* Menu links */
+
+  body.admin-sidebar-manually-collapsed .admin-sidebar .admin-menu-link {
+    justify-content: center;
+    gap: 0;
+  }
+
+  .admin-menu-accordion {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease;
+  }
+}
