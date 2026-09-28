@@ -296,6 +296,33 @@
   });
 
   /* ============================================
+     Active Menu Auto-Open (Demo1's _setActiveLink behavior)
+     If the current page link (aria-current="page") sits inside
+     an accordion panel, open that panel on load so the active
+     item is always visible.
+     ============================================ */
+  (function () {
+    const activeLink = document.querySelector(
+      '.admin-sidebar nav [aria-current="page"]'
+    );
+    if (!activeLink) return;
+
+    const panel = activeLink.closest(".admin-menu-accordion");
+    if (!panel) return;
+
+    const toggle = document.querySelector(
+      '[data-accordion-toggle][aria-controls="' + panel.id + '"]'
+    );
+    if (!toggle || toggle.getAttribute("aria-expanded") === "true") return;
+
+    panel.style.maxHeight = panel.scrollHeight + "px";
+    toggle.setAttribute("aria-expanded", "true");
+
+    const chevron = toggle.querySelector(".admin-menu-chevron");
+    if (chevron) chevron.classList.add("rotate-180");
+  })();
+
+  /* ============================================
      Admin User Dropdown
      ============================================ */
   const userButton = document.querySelector("#admin-user-button");

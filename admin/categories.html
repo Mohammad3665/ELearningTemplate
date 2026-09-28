@@ -1,0 +1,1295 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>وایلند | پنل مدیریت - دسته‌بندی‌ها</title>
+
+  <!-- #region FavIcon -->
+  <link rel="icon" type="image/png" href="../assets/images/fav-icon.png">
+  <!-- endregion -->
+
+  <!-- #region DataTables (same vendor CSS as payment-history page) -->
+  <link rel="stylesheet" href="../src/css/datatables.min.css">
+  <link rel="stylesheet" href="../src/css/responsive.datatables.min.css">
+  <!-- endregion -->
+
+  <!-- #region Admin DataTable skin -->
+  <link rel="stylesheet" href="../src/css/admin-categories-datatable.css">
+  <!-- endregion -->
+
+  <!-- #region Stylesheets -->
+  <link rel="stylesheet" href="../src/css/style.css" />
+  <!-- endregion -->
+
+  <!-- #region Google Fonts (Vazirmatn for Persian) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet" />
+  <!-- endregion -->
+</head>
+
+<body class="bg-light font-['Vazirmatn'] text-dark antialiased">
+  <!-- #region SIDEBAR (desktop, docks right, collapsible via body class) -->
+  <aside id="admin-sidebar"
+    class="admin-sidebar fixed inset-y-0 right-0 z-40 hidden flex-col border-e border-border bg-white lg:flex">
+    <!-- Sidebar Header (logo + collapse toggle) -->
+    <div class="admin-sidebar-header relative flex h-20 shrink-0 items-center border-b border-border px-6">
+      <a href="../index.html" aria-label="صفحه اصلی وایلند" class="shrink-0">
+        <!-- Full wordmark (expanded state) -->
+        <img src="../assets/images/logo.png" alt="whyland" class="admin-sidebar-logo h-auto w-24" />
+        <!-- Compact mark (collapsed state) -->
+        <img src="../assets/images/fav-icon.png" alt="whyland" class="admin-sidebar-logo-compact hidden size-9" />
+      </a>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="flex-1 overflow-y-auto px-4 py-5" aria-label="منوی پنل مدیریت">
+      <ul class="flex flex-col gap-1">
+        <!-- Dashboard menu item -->
+        <li>
+          <a href="index.html"
+            class="admin-menu-link flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <rect x="3" y="3" width="7" height="9" rx="1.5" />
+              <rect x="14" y="3" width="7" height="5" rx="1.5" />
+              <rect x="14" y="12" width="7" height="9" rx="1.5" />
+              <rect x="3" y="16" width="7" height="5" rx="1.5" />
+            </svg>
+            <span class="admin-menu-title">داشبورد</span>
+          </a>
+        </li>
+
+        <!-- Courses (accordion) -->
+        <li>
+          <button type="button" data-accordion-toggle
+            class="admin-menu-link flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary"
+            aria-expanded="false" aria-controls="menu-courses">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <path d="M4 19.5V6a2 2 0 0 1 2-2h11.5a2 2 0 0 1 2 2v13.5" />
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H19.5" />
+              <path d="M9 8h6" />
+            </svg>
+            <span class="admin-menu-title flex-1 text-start">دوره‌ها</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" class="admin-menu-chevron size-4 shrink-0 text-body transition-transform duration-200">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <ul id="menu-courses" class="admin-menu-accordion flex flex-col gap-1 ps-7 pt-1">
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">لیست
+                دوره‌ها</a></li>
+            <li><a href="categories.html" aria-current="page"
+                class="block rounded-lg px-3 py-2 text-xs font-semibold text-primary">دسته‌بندی‌ها</a>
+            </li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">سرفصل‌ها
+                و اپیزودها</a></li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">سوالات
+                متداول دوره</a></li>
+          </ul>
+        </li>
+
+        <!-- Orders (accordion) -->
+        <li>
+          <button type="button" data-accordion-toggle
+            class="admin-menu-link flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary"
+            aria-expanded="false" aria-controls="menu-orders">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <path d="M3 6h18" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            <span class="admin-menu-title flex-1 text-start">سفارشات</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" class="admin-menu-chevron size-4 shrink-0 text-body transition-transform duration-200">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <ul id="menu-orders" class="admin-menu-accordion flex flex-col gap-1 ps-7 pt-1">
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">لیست
+                سفارشات</a></li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">لیست
+                پرداخت‌ها</a></li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">کدهای
+                تخفیف</a></li>
+          </ul>
+        </li>
+
+        <!-- Users & Roles (accordion) -->
+        <li>
+          <button type="button" data-accordion-toggle
+            class="admin-menu-link flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary"
+            aria-expanded="false" aria-controls="menu-users">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            <span class="admin-menu-title flex-1 text-start">کاربران و نقش‌ها</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" class="admin-menu-chevron size-4 shrink-0 text-body transition-transform duration-200">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <ul id="menu-users" class="admin-menu-accordion flex flex-col gap-1 ps-7 pt-1">
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">لیست
+                کاربران</a></li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">نقش‌ها</a>
+            </li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">دسترسی‌ها</a>
+            </li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">پروفایل
+                مدرس</a></li>
+          </ul>
+        </li>
+
+        <!-- Blog posts -->
+        <li>
+          <a href="#"
+            class="admin-menu-link flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <path d="M14 2v6h6" />
+              <path d="M16 13H8" />
+              <path d="M16 17H8" />
+              <path d="M10 9H8" />
+            </svg>
+            <span class="admin-menu-title">مقالات</span>
+          </a>
+        </li>
+
+        <!-- FAQs -->
+        <li>
+          <a href="#"
+            class="admin-menu-link flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+              <path d="M12 17h.01" />
+            </svg>
+            <span class="admin-menu-title">سوالات متداول</span>
+          </a>
+        </li>
+
+        <!-- Settings -->
+        <li>
+          <a href="#"
+            class="admin-menu-link flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            </svg>
+            <span class="admin-menu-title">تنظیمات</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Sidebar Footer: back to site -->
+    <div class="shrink-0 border-t border-border p-4">
+      <a href="../index.html"
+        class="admin-menu-link flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          class="size-5 shrink-0">
+          <path d="M19 12H5" />
+          <path d="m12 19-7-7 7-7" />
+        </svg>
+        <span class="admin-menu-title">بازگشت به سایت</span>
+      </a>
+    </div>
+  </aside>
+
+  <button type="button" id="admin-sidebar-toggle"
+    class="admin-sidebar-toggle -translate-y-1/2 fixed z-50 hidden size-7.5 cursor-pointer items-center justify-center rounded-lg border border-border bg-white text-body shadow-sm transition-colors hover:text-primary lg:flex"
+    style="top: 2.5rem;" aria-expanded="true" aria-label="جمع کردن سایدبار">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      class="size-4 transform scale-x-[-1]">
+      <path d="M19 12H5" />
+      <path d="m12 19-7-7 7-7" />
+    </svg>
+  </button>
+  <!-- endregion -->
+
+  <!-- #region HEADER (fixed, offset follows sidebar state) -->
+  <header id="admin-header"
+    class="admin-header-offset fixed top-0 z-30 flex h-20 w-full items-center justify-between border-b border-border bg-white/95 px-4 backdrop-blur-sm sm:px-6 lg:px-8">
+    <div class="flex items-center gap-3">
+      <!-- Mobile menu trigger -->
+      <button type="button" id="admin-mobile-menu-button"
+        class="flex size-9 cursor-pointer items-center justify-center rounded-md transition-all active:scale-95 active:bg-gray-100 lg:hidden"
+        aria-label="باز کردن منو" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          class="size-6">
+          <path d="M4 6h16" />
+          <path d="M4 12h16" />
+          <path d="M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Page title (visible from sm) -->
+      <h1 class="hidden text-base font-bold sm:block">داشبورد</h1>
+    </div>
+
+    <div class="flex items-center gap-2 sm:gap-3">
+      <!-- View site link -->
+      <a href="../index.html"
+        class="hidden size-9 items-center justify-center rounded-full border border-border text-body transition-colors hover:border-primary hover:bg-primary hover:text-white min-[500px]:flex"
+        aria-label="مشاهده سایت">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          class="size-4">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+          <path d="M15 3h6v6" />
+          <path d="M10 14 21 3" />
+        </svg>
+      </a>
+
+      <!-- Notifications -->
+      <button type="button"
+        class="flex size-9 items-center justify-center rounded-full border border-border text-body transition-colors hover:border-primary hover:bg-primary hover:text-white"
+        aria-label="اعلان‌ها">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          class="size-4">
+          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+          <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+        </svg>
+      </button>
+
+      <!-- Admin user dropdown -->
+      <div class="relative" id="admin-user-dropdown-wrapper">
+        <button type="button" id="admin-user-button"
+          class="flex cursor-pointer items-center gap-2 rounded-full border border-border py-1 pe-3 ps-1 transition-colors hover:border-primary"
+          aria-haspopup="true" aria-expanded="false">
+          <span
+            class="flex size-8 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">م‌ز</span>
+          <span class="hidden text-xs font-semibold sm:block">محمدمهدی زنگنه</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            class="size-4 text-body transition-transform duration-200" id="admin-user-chevron">
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </button>
+
+        <!-- Dropdown panel -->
+        <div id="admin-user-dropdown"
+          class="invisible absolute inset-e-0 top-full z-50 mt-2 w-52 opacity-0 transition-all duration-200">
+          <div class="grid gap-1 rounded-xl border border-border bg-white p-2 shadow-lg">
+            <a href="#"
+              class="rounded-lg px-3 py-2 text-xs font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary">ویرایش
+              پروفایل</a>
+            <a href="#"
+              class="rounded-lg px-3 py-2 text-xs font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary">تغییر
+              رمز عبور</a>
+            <div class="my-1 border-t border-border"></div>
+            <a href="../login.html"
+              class="rounded-lg px-3 py-2 text-xs font-medium text-danger transition-colors hover:bg-danger-light">خروج
+              از حساب</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- endregion -->
+
+  <!-- #region Backdrop Overlay (mobile drawer) -->
+  <div id="admin-menu-overlay"
+    class="pointer-events-none fixed inset-0 z-40 bg-black/50 opacity-0 backdrop-blur-sm transition-opacity duration-300 lg:hidden">
+  </div>
+  <!-- endregion -->
+
+  <!-- #region MOBILE DRAWER (slides from right) -->
+  <aside id="admin-mobile-menu"
+    class="fixed inset-y-0 right-0 z-50 flex w-72 translate-x-full flex-col bg-white shadow-2xl transition-transform duration-300 ease-in-out lg:hidden">
+    <!-- Drawer Header -->
+    <div class="flex h-20 shrink-0 items-center justify-between border-b border-border px-5">
+      <img src="../assets/images/logo.png" alt="whyland" class="h-auto w-24" />
+      <button type="button" id="admin-close-menu-button"
+        class="cursor-pointer rounded-lg p-1 text-gray-500 hover:bg-gray-100" aria-label="بستن منو">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+          class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Drawer Menu (mirrors desktop sidebar) -->
+    <nav class="flex-1 overflow-y-auto px-4 py-5" aria-label="منوی پنل مدیریت">
+      <ul class="flex flex-col gap-1">
+        <li>
+          <a href="index.html"
+            class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <rect x="3" y="3" width="7" height="9" rx="1.5" />
+              <rect x="14" y="3" width="7" height="5" rx="1.5" />
+              <rect x="14" y="12" width="7" height="9" rx="1.5" />
+              <rect x="3" y="16" width="7" height="5" rx="1.5" />
+            </svg>
+            <span>داشبورد</span>
+          </a>
+        </li>
+        <li>
+          <button type="button" data-accordion-toggle
+            class="flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary"
+            aria-expanded="false" aria-controls="drawer-menu-courses">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <path d="M4 19.5V6a2 2 0 0 1 2-2h11.5a2 2 0 0 1 2 2v13.5" />
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H19.5" />
+              <path d="M9 8h6" />
+            </svg>
+            <span class="flex-1 text-start">دوره‌ها</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" class="admin-menu-chevron size-4 shrink-0 text-body transition-transform duration-200">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <ul id="drawer-menu-courses" class="hidden flex-col gap-1 ps-7 pt-1">
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">لیست
+                دوره‌ها</a></li>
+            <li><a href="categories.html" aria-current="page"
+                class="block rounded-lg px-3 py-2 text-xs font-semibold text-primary">دسته‌بندی‌ها</a>
+            </li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">سرفصل‌ها
+                و اپیزودها</a></li>
+          </ul>
+        </li>
+        <li>
+          <button type="button" data-accordion-toggle
+            class="flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary"
+            aria-expanded="false" aria-controls="drawer-menu-orders">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <path d="M3 6h18" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            <span class="flex-1 text-start">سفارشات</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" class="admin-menu-chevron size-4 shrink-0 text-body transition-transform duration-200">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <ul id="drawer-menu-orders" class="hidden flex-col gap-1 ps-7 pt-1">
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">لیست
+                سفارشات</a></li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">لیست
+                پرداخت‌ها</a></li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">کدهای
+                تخفیف</a></li>
+          </ul>
+        </li>
+        <li>
+          <button type="button" data-accordion-toggle
+            class="flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary"
+            aria-expanded="false" aria-controls="drawer-menu-users">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            <span class="flex-1 text-start">کاربران و نقش‌ها</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" class="admin-menu-chevron size-4 shrink-0 text-body transition-transform duration-200">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <ul id="drawer-menu-users" class="hidden flex-col gap-1 ps-7 pt-1">
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">لیست
+                کاربران</a></li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">نقش‌ها</a>
+            </li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">دسترسی‌ها</a>
+            </li>
+            <li><a href="#"
+                class="block rounded-lg px-3 py-2 text-xs font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">پروفایل
+                مدرس</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#"
+            class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <path d="M14 2v6h6" />
+              <path d="M16 13H8" />
+              <path d="M16 17H8" />
+            </svg>
+            <span>مقالات</span>
+          </a>
+        </li>
+        <li>
+          <a href="#"
+            class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+              <path d="M12 17h.01" />
+            </svg>
+            <span>سوالات متداول</span>
+          </a>
+        </li>
+        <li>
+          <a href="#"
+            class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition-colors hover:bg-gray-50 hover:text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            </svg>
+            <span>تنظیمات</span>
+          </a>
+        </li>
+        <!-- Back to site -->
+        <li class="mt-4 border-t border-border pt-4">
+          <a href="../index.html"
+            class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-body transition-colors hover:bg-gray-50 hover:text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-5 shrink-0">
+              <path d="M19 12H5" />
+              <path d="m12 19-7-7 7-7" />
+            </svg>
+            <span>بازگشت به سایت</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+  <!-- endregion -->
+
+
+  <!-- #region MAIN -->
+  <main class="admin-main-offset min-h-screen px-4 pb-12 pt-24 sm:px-6 lg:px-8">
+    <!-- Page Heading (mobile) + Breadcrumb -->
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <div>
+        <h1 class="text-lg font-bold sm:hidden">دسته‌بندی‌ها</h1>
+        <nav class="hidden items-center gap-1.5 text-xs text-body sm:flex" aria-label="مسیر">
+          <a href="index.html" class="transition-colors hover:text-primary">پنل مدیریت</a>
+          <span class="text-gray-400">/</span>
+          <span class="font-medium text-dark">دوره‌ها</span>
+          <span class="text-gray-400">/</span>
+          <span class="font-medium text-primary">دسته‌بندی‌ها</span>
+        </nav>
+      </div>
+      <span id="admin-today-date"
+        class="rounded-lg bg-white px-3 py-1.5 text-xs font-medium text-body shadow-sm">--</span>
+    </div>
+
+    <!-- #region Categories Card (Metronic card-grid pattern) -->
+    <div>
+
+      <!-- Page Heading -->
+      <div class="my-6 text-center sm:text-right">
+        <h1 class="text-xl font-bold text-dark sm:text-2xl">
+          دسته‌بندی‌ها
+        </h1>
+
+        <p class="mt-2 text-xs leading-relaxed text-body sm:text-sm">
+          مدیریت دسته‌بندی‌های دوره‌ها؛ می‌توانید دسته‌بندی‌ها را ایجاد، ویرایش یا حذف کنید.
+        </p>
+      </div>
+
+      <!-- ==================== CATEGORIES TOOLBAR ==================== -->
+      <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+
+        <h2 class="text-sm font-bold text-dark">
+          لیست دسته‌بندی‌ها
+        </h2>
+
+        <div class="flex flex-wrap items-center gap-2">
+
+          <!-- Search -->
+          <label for="category-search"
+            class="flex h-9 min-w-0 flex-1 items-center gap-2 rounded-lg border border-border bg-white px-3 text-body transition-colors focus-within:border-primary sm:w-56 sm:flex-none">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-4 shrink-0">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
+
+            <input id="category-search" type="search" placeholder="جستجوی دسته‌بندی..."
+              class="w-full bg-transparent text-xs text-dark outline-none placeholder:text-body/70" />
+          </label>
+
+          <!-- Status Filter -->
+          <select id="category-status-filter"
+            class="h-9 cursor-pointer rounded-lg border border-border bg-white px-3 text-xs text-dark outline-none transition-colors focus:border-primary">
+            <option value="all">همه وضعیت‌ها</option>
+            <option value="active">فعال</option>
+            <option value="inactive">غیرفعال</option>
+          </select>
+
+          <!-- Refresh -->
+          <button type="button" id="category-refresh"
+            class="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-white text-body transition-colors hover:border-primary hover:text-primary"
+            aria-label="بازنشانی جستجو و فیلتر" title="بازنشانی">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" class="size-4">
+              <path d="M21 12a9 9 0 1 1-2.64-6.36" />
+              <path d="M21 3v6h-6" />
+            </svg>
+          </button>
+
+          <!-- Add Category -->
+          <button type="button" id="add-category-button"
+            class="flex h-9 shrink-0 cursor-pointer items-center gap-1.5 rounded-lg bg-primary px-3.5 text-xs font-semibold text-white transition-all hover:bg-primary/90 active:scale-95">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" class="size-4">
+              <path d="M12 5v14" />
+              <path d="M5 12h14" />
+            </svg>
+
+            <span class="hidden sm:inline">
+              افزودن دسته‌بندی جدید
+            </span>
+
+            <span class="sm:hidden">
+              افزودن
+            </span>
+          </button>
+
+        </div>
+      </div>
+
+      <!-- ==================== CATEGORIES TABLE ==================== -->
+      <div id="categories-list">
+
+        <div class="overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+
+          <table id="categories-table" class="w-full text-right">
+
+            <thead>
+              <tr>
+                <th scope="col">نام</th>
+                <th scope="col">نام لاتین</th>
+                <th scope="col">ترتیب نمایش</th>
+                <th scope="col">والد</th>
+                <th scope="col">وضعیت</th>
+                <th scope="col">تاریخ ایجاد</th>
+                <th scope="col">دوره‌ها</th>
+                <th scope="col">عملیات</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <!-- Row 1 -->
+              <tr>
+                <td>برنامه‌نویسی</td>
+                <td>Programming</td>
+                <td>1</td>
+                <td>—</td>
+                <td data-status="فعال">
+                  <span class="category-status category-status-active">
+                    فعال
+                  </span>
+                </td>
+                <td>۱۲ شهریور ۱۴۰۴</td>
+                <td>۱۲ دوره</td>
+                <td>
+                  <div class="category-actions">
+
+                    <button type="button" class="category-edit-btn" aria-label="ویرایش برنامه‌نویسی" title="ویرایش">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="category-delete-btn" data-delete-id="1" aria-label="حذف برنامه‌نویسی"
+                      title="حذف">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                      </svg>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 2 -->
+              <tr>
+                <td>طراحی وب</td>
+                <td>Web Design</td>
+                <td>2</td>
+                <td>—</td>
+                <td data-status="فعال">
+                  <span class="category-status category-status-active">
+                    فعال
+                  </span>
+                </td>
+                <td>۱۵ شهریور ۱۴۰۴</td>
+                <td>۸ دوره</td>
+                <td>
+                  <div class="category-actions">
+
+                    <button type="button" class="category-edit-btn" aria-label="ویرایش طراحی وب" title="ویرایش">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="category-delete-btn" data-delete-id="2" aria-label="حذف طراحی وب"
+                      title="حذف">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                      </svg>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 3 -->
+              <tr>
+                <td>فرانت‌اند</td>
+                <td>Frontend</td>
+                <td>3</td>
+                <td>برنامه‌نویسی</td>
+                <td data-status="فعال">
+                  <span class="category-status category-status-active">
+                    فعال
+                  </span>
+                </td>
+                <td>۱۸ شهریور ۱۴۰۴</td>
+                <td>۶ دوره</td>
+                <td>
+                  <div class="category-actions">
+
+                    <button type="button" class="category-edit-btn" aria-label="ویرایش فرانت‌اند" title="ویرایش">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="category-delete-btn" data-delete-id="3" aria-label="حذف فرانت‌اند"
+                      title="حذف">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                      </svg>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 4 -->
+              <tr>
+                <td>بک‌اند</td>
+                <td>Backend</td>
+                <td>4</td>
+                <td>برنامه‌نویسی</td>
+                <td data-status="فعال">
+                  <span class="category-status category-status-active">
+                    فعال
+                  </span>
+                </td>
+                <td>۲۰ شهریور ۱۴۰۴</td>
+                <td>۵ دوره</td>
+                <td>
+                  <div class="category-actions">
+
+                    <button type="button" class="category-edit-btn" aria-label="ویرایش بک‌اند" title="ویرایش">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="category-delete-btn" data-delete-id="4" aria-label="حذف بک‌اند"
+                      title="حذف">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                      </svg>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 5 -->
+              <tr>
+                <td>پایگاه داده</td>
+                <td>Database</td>
+                <td>5</td>
+                <td>برنامه‌نویسی</td>
+                <td data-status="غیرفعال">
+                  <span class="category-status category-status-inactive">
+                    غیرفعال
+                  </span>
+                </td>
+                <td>۲۲ شهریور ۱۴۰۴</td>
+                <td>۳ دوره</td>
+                <td>
+                  <div class="category-actions">
+
+                    <button type="button" class="category-edit-btn" aria-label="ویرایش پایگاه داده" title="ویرایش">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="category-delete-btn" data-delete-id="5" aria-label="حذف پایگاه داده"
+                      title="حذف">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                      </svg>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 6 -->
+              <tr>
+                <td>طراحی وب</td>
+                <td>Web Design</td>
+                <td>1</td>
+                <td>بدون والد</td>
+                <td>
+                  <span class="category-status category-status-active">فعال</span>
+                </td>
+                <td>۱۴۰۴/۰۲/۱۵</td>
+                <td>۱۲</td>
+                <td>
+                  <div class="category-actions">
+
+                    <button type="button" class="category-edit-btn" aria-label="ویرایش طراحی وب" title="ویرایش">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="category-delete-btn" data-delete-id="6" aria-label="حذف طراحی وب"
+                      title="حذف">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                      </svg>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 7 -->
+              <tr>
+                <td>توسعه فرانت‌اند</td>
+                <td>Frontend Development</td>
+                <td>2</td>
+                <td>برنامه‌نویسی</td>
+                <td>
+                  <span class="category-status category-status-active">فعال</span>
+                </td>
+                <td>۱۴۰۴/۰۲/۱۸</td>
+                <td>۱۸</td>
+                <td>
+                  <div class="category-actions">
+
+                    <button type="button" class="category-edit-btn" aria-label="ویرایش توسعه فرانت‌اند" title="ویرایش">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="category-delete-btn" data-delete-id="7"
+                      aria-label="حذف توسعه فرانت‌اند" title="حذف">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                      </svg>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 8 -->
+              <tr>
+                <td>توسعه بک‌اند</td>
+                <td>Backend Development</td>
+                <td>3</td>
+                <td>برنامه‌نویسی</td>
+                <td>
+                  <span class="category-status category-status-active">فعال</span>
+                </td>
+                <td>۱۴۰۴/۰۲/۲۲</td>
+                <td>۱۵</td>
+                <td>
+                  <div class="category-actions">
+
+                    <button type="button" class="category-edit-btn" aria-label="ویرایش توسعه بک‌اند" title="ویرایش">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="category-delete-btn" data-delete-id="8" aria-label="حذف توسعه بک‌اند"
+                      title="حذف">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                      </svg>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 9 -->
+              <tr>
+                <td>پایگاه داده</td>
+                <td>Database</td>
+                <td>4</td>
+                <td>برنامه‌نویسی</td>
+                <td>
+                  <span class="category-status category-status-inactive">
+                    غیرفعال
+                  </span>
+                </td>
+                <td>۱۴۰۴/۰۳/۰۱</td>
+                <td>۹</td>
+                <td>
+                  <div class="category-actions">
+
+                    <button type="button" class="category-edit-btn" aria-label="ویرایش پایگاه داده" title="ویرایش">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="category-delete-btn" data-delete-id="9" aria-label="حذف پایگاه داده"
+                      title="حذف">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                      </svg>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 10 -->
+              <tr>
+                <td>هوش مصنوعی</td>
+                <td>Artificial Intelligence</td>
+                <td>5</td>
+                <td>برنامه‌نویسی</td>
+                <td>
+                  <span class="category-status category-status-active">فعال</span>
+                </td>
+                <td>۱۴۰۴/۰۳/۰۷</td>
+                <td>۲۱</td>
+                <td>
+                  <div class="category-actions">
+
+                    <button type="button" class="category-edit-btn" aria-label="ویرایش هوش مصنوعی" title="ویرایش">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="category-delete-btn" data-delete-id="10" aria-label="حذف هوش مصنوعی"
+                      title="حذف">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                      </svg>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 11 -->
+              <tr>
+                <td>امنیت شبکه</td>
+                <td>Network Security</td>
+                <td>6</td>
+                <td>شبکه و امنیت</td>
+                <td>
+                  <span class="category-status category-status-active">فعال</span>
+                </td>
+                <td>۱۴۰۴/۰۳/۱۲</td>
+                <td>۷</td>
+                <td>
+                  <div class="category-actions">
+
+                    <button type="button" class="category-edit-btn" aria-label="ویرایش امنیت شبکه" title="ویرایش">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="category-delete-btn" data-delete-id="11" aria-label="حذف امنیت شبکه"
+                      title="حذف">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                      </svg>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 12 -->
+              <tr>
+                <td>گرافیک و طراحی</td>
+                <td>Graphic Design</td>
+                <td>7</td>
+                <td>طراحی</td>
+                <td>
+                  <span class="category-status category-status-active">فعال</span>
+                </td>
+                <td>۱۴۰۴/۰۳/۱۸</td>
+                <td>۱۴</td>
+                <td>
+                  <div class="category-actions">
+
+                    <button type="button" class="category-edit-btn" aria-label="ویرایش گرافیک و طراحی" title="ویرایش">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="category-delete-btn" data-delete-id="12"
+                      aria-label="حذف گرافیک و طراحی" title="حذف">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                      </svg>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 13 -->
+              <tr>
+                <td>دیجیتال مارکتینگ</td>
+                <td>Digital Marketing</td>
+                <td>8</td>
+                <td>بازاریابی</td>
+                <td>
+                  <span class="category-status category-status-inactive">
+                    غیرفعال
+                  </span>
+                </td>
+                <td>۱۴۰۴/۰۳/۲۵</td>
+                <td>۱۱</td>
+                <td>
+                  <div class="category-actions">
+
+                    <button type="button" class="category-edit-btn" aria-label="ویرایش دیجیتال مارکتینگ" title="ویرایش">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="category-delete-btn" data-delete-id="13"
+                      aria-label="حذف دیجیتال مارکتینگ" title="حذف">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                      </svg>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 14 -->
+              <tr>
+                <td>مدیریت پروژه</td>
+                <td>Project Management</td>
+                <td>9</td>
+                <td>کسب‌وکار</td>
+                <td>
+                  <span class="category-status category-status-active">فعال</span>
+                </td>
+                <td>۱۴۰۴/۰۴/۰۲</td>
+                <td>۸</td>
+                <td>
+                  <div class="category-actions">
+
+                    <button type="button" class="category-edit-btn" aria-label="ویرایش مدیریت پروژه" title="ویرایش">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="category-delete-btn" data-delete-id="14" aria-label="حذف مدیریت پروژه"
+                      title="حذف">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                      </svg>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 15 -->
+              <tr>
+                <td>مهارت‌های نرم</td>
+                <td>Soft Skills</td>
+                <td>10</td>
+                <td>توسعه فردی</td>
+                <td>
+                  <span class="category-status category-status-active">فعال</span>
+                </td>
+                <td>۱۴۰۴/۰۴/۰۸</td>
+                <td>۱۶</td>
+                <td>
+                  <div class="category-actions">
+
+                    <button type="button" class="category-edit-btn" aria-label="ویرایش مهارت‌های نرم" title="ویرایش">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="category-delete-btn" data-delete-id="15" aria-label="حذف مهارت‌های نرم"
+                      title="حذف">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                      </svg>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 16 -->
+              <tr>
+                <td>مبانی شبکه</td>
+                <td>Networking Basics</td>
+                <td>11</td>
+                <td>شبکه و امنیت</td>
+                <td>
+                  <span class="category-status category-status-inactive">
+                    غیرفعال
+                  </span>
+                </td>
+                <td>۱۴۰۴/۰۴/۱۵</td>
+                <td>۵</td>
+                <td>
+                  <div class="category-actions">
+
+                    <button type="button" class="category-edit-btn" aria-label="ویرایش مبانی شبکه" title="ویرایش">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="category-delete-btn" data-delete-id="16" aria-label="حذف مبانی شبکه"
+                      title="حذف">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="size-4">
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                      </svg>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- endregion -->
+
+    <!-- #region Empty State (search/filter found nothing) -->
+    <div id="categories-empty"
+      class="mt-6 hidden rounded-2xl border border-dashed border-border bg-white p-10 text-center">
+      <div class="mx-auto flex size-14 items-center justify-center rounded-full bg-light text-body">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          class="size-7">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+      </div>
+      <h3 class="mt-4 text-sm font-bold text-dark">دسته‌بندی‌ای یافت نشد</h3>
+      <p class="mt-1 text-xs text-body">عبارت جستجو یا فیلتر وضعیت را تغییر دهید.</p>
+      <button type="button" id="category-empty-reset"
+        class="mt-4 rounded-lg border border-border px-4 py-2 text-xs font-medium text-dark transition-colors hover:border-primary hover:text-primary">
+        بازنشانی فیلترها
+      </button>
+    </div>
+    <!-- endregion -->
+  </main>
+  <!-- endregion -->
+
+  <!-- #region DELETE MODAL (doc section 2.3: soft delete) -->
+  <div id="category-delete-backdrop" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm"></div>
+
+  <div id="category-delete-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4" role="dialog"
+    aria-modal="true" aria-labelledby="category-delete-title">
+    <div class="w-full max-w-sm rounded-2xl border border-border bg-white p-6 shadow-xl">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex size-11 shrink-0 items-center justify-center rounded-full bg-danger-light text-danger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" class="size-5">
+            <path d="M3 6h18" />
+            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+            <path d="M10 11v6" />
+            <path d="M14 11v6" />
+          </svg>
+        </div>
+        <button type="button" id="category-delete-close"
+          class="cursor-pointer rounded-lg p-1 text-gray-500 hover:bg-gray-100" aria-label="بستن">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+            class="size-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <h3 id="category-delete-title" class="mt-4 text-base font-bold text-dark">حذف دسته‌بندی</h3>
+      <p class="mt-2 text-xs leading-6 text-body">
+        آیا از حذف
+        <span id="category-delete-name" class="font-semibold text-dark">—</span>
+        مطمئن هستید؟ این دسته‌بندی به سبد حذف‌شده‌ها منتقل می‌شود (حذف نرم).
+      </p>
+
+      <!-- Referenced-category error (doc: پیام خطا در صورت ارجاع شدن توسط دوره) -->
+      <div id="category-delete-error"
+        class="mt-3 hidden rounded-lg bg-danger-light px-3 py-2.5 text-xs font-medium text-red-500">
+        این دسته‌بندی توسط یک یا چند دوره استفاده شده است و قابل حذف نیست.
+      </div>
+
+      <div class="mt-5 flex items-center justify-end gap-2">
+        <button type="button" id="category-delete-cancel"
+          class="cursor-pointer rounded-lg border border-border px-4 py-2 text-xs font-medium text-dark transition-colors hover:bg-gray-50">
+          انصراف
+        </button>
+        <button type="button" id="category-delete-confirm"
+          class="cursor-pointer rounded-lg bg-red-500 px-4 py-2 text-xs font-semibold text-white transition-all hover:bg-red-500/90 active:scale-95">
+          حذف دسته‌بندی
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- endregion -->
+
+  <!-- #region Entry JavaScript Modules -->
+  <script src="../src/js/main.js"></script>
+  <script src="../src/js/jalali-date.js" defer></script>
+  <script src="../src/js/datatables.min.js"></script>
+  <script src="../src/js/responsive.datatables.min.js"></script>
+  <script src="../src/js/admin/admin-layout.js" defer></script>
+  <script src="../src/js/admin/admin-categories.js" defer></script>
+  <!-- endregion -->
+</body>
+
+</html>

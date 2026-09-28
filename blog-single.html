@@ -397,7 +397,7 @@
                 </a>
 
 
-<!-- Admin Panel Pages -->
+                <!-- Admin Panel Pages -->
                 <div class="mt-2 cursor-default border-b border-border pb-2 pt-3">
                   <h3 class="cursor-default text-xs font-bold text-dark">
                     صفحات پنل ادمین
@@ -408,8 +408,8 @@
                   class="border-b border-border pb-3 pt-1 text-xs font-medium text-dark/80 transition-colors hover:text-primary">
                   داشبورد
                 </a>
+              </div>
             </div>
-          </div>
         </details>
         <a href="#" class="border-b border-border py-3 text-sm font-medium text-dark hover:text-primary">
           افزونه‌های لرن‌پرس
@@ -909,9 +909,18 @@
                     </label>
                   </div>
                 </div>
-                <textarea rows="5" placeholder="دیدگاه"
-                  class="w-full rounded-lg border border-border bg-white px-4 py-3 text-sm text-dark placeholder:text-gray-400 focus:border-primary focus:outline-none"></textarea>
+                <!-- Comment Message -->
+                <div class="relative sm:col-span-2">
+                  <textarea id="contact-message" name="message" rows="5" placeholder=" " required
+                    class="peer w-full rounded-xl border border-gray-200 bg-white px-4 pb-2 pt-3 text-right text-xs text-dark outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm"></textarea>
 
+                  <label for="contact-message"
+                    class="pointer-events-none absolute right-4 top-4 bg-white px-1 text-sm text-gray-400 transition-all duration-200
+                          peer-focus:right-3 peer-focus:top-0 peer-focus:-translate-y-1/2 peer-focus:text-primary peer-focus:text-sm
+                          peer-not-placeholder-shown:right-3 peer-not-placeholder-shown:top-0 peer-not-placeholder-shown:-translate-y-1/2 peer-[:not(:placeholder-shown)]:text-sm">
+                    دیدگاه *
+                  </label>
+                </div>
                 <!-- Checkbox container: centered on mobile, right-aligned on desktop -->
                 <div class="flex items-center justify-center gap-2 pt-0.5 sm:justify-start">
                   <div class="custom-checkbox">
