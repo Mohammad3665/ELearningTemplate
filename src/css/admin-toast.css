@@ -1,0 +1,46 @@
+/* admin-toast.css */
+@keyframes toast-slide-in {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes toast-slide-out {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+@keyframes toast-progress {
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0%;
+    }
+}
+
+.toast-enter {
+    animation: toast-slide-in 0.3s ease-out forwards;
+}
+
+.toast-exit {
+    animation: toast-slide-out 0.3s ease-in forwards;
+}
+
+.toast-progress-bar {
+    animation: toast-progress linear forwards;
+}
